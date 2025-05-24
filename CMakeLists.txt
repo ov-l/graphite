@@ -82,8 +82,13 @@ if (BUILD_SHARED_LIBS)
 endif()
 
 add_subdirectory(src)
-add_subdirectory(tests)
-add_subdirectory(doc)
+
+option(GRAPHITE2_BUILD_TESTS_AND_DOCS "Build tests and documentation" OFF)
+if (GRAPHITE2_BUILD_TESTS_AND_DOCS)
+    add_subdirectory(tests)
+    add_subdirectory(doc)
+endif()
+
 if (NOT GRAPHITE2_NFILEFACE)
     add_subdirectory(gr2fonttest)
 endif()
