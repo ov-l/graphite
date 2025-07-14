@@ -31,10 +31,6 @@ if (GRAPHITE2_TELEMETRY)
     add_definitions(-DGRAPHITE2_TELEMETRY)
 endif()
 
-if (NOT BUILD_SHARED_LIBS)
-    add_definitions(-DGRAPHITE2_STATIC)
-endif()
-
 set(GRAPHITE_HEADERS
     ../include/graphite2/Font.h
     ../include/graphite2/Segment.h
@@ -75,6 +71,10 @@ add_library(graphite2
     UtfCodec.cpp
     ${FILEFACE}
     ${TRACING})
+    
+if (NOT BUILD_SHARED_LIBS)
+    target_compile_definitions(graphite2 PUBLIC -DGRAPHITE2_STATIC)
+endif()
 
 set_target_properties(graphite2 PROPERTIES  PUBLIC_HEADER "${GRAPHITE_HEADERS}"
                                             SOVERSION ${GRAPHITE_SO_VERSION}
