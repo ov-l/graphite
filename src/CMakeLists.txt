@@ -138,5 +138,23 @@ if  (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 endif()
 
 
+include(CMakePackageConfigHelpers)
+include(GNUInstallDirs)
+
+configure_package_config_file(
+    "${PROJECT_SOURCE_DIR}/graphite2Config.cmake.in"
+    "${PROJECT_BINARY_DIR}/graphite2Config.cmake"
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/graphite2
+)
+
+write_basic_package_version_file(
+    "graphite2ConfigVersion.cmake"
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY SameMajorVersion
+)
+
 install(TARGETS graphite2 EXPORT graphite2 LIBRARY DESTINATION lib${LIB_SUFFIX} ARCHIVE DESTINATION lib${LIB_SUFFIX} PUBLIC_HEADER DESTINATION include/graphite2 RUNTIME DESTINATION bin)
-install(EXPORT graphite2 DESTINATION share/graphite2 NAMESPACE gr2_)
+install(EXPORT graphite2 FILE graphite2Targets.cmake NAMESPACE gr2_:: DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/graphite2)
+install(FILES ${PROJECT_BINARY_DIR}/graphite2Config.cmake
+              ${PROJECT_BINARY_DIR}/graphite2ConfigVersion.cmake
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/graphite2 )
