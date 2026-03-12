@@ -154,7 +154,7 @@ write_basic_package_version_file(
     COMPATIBILITY SameMajorVersion
 )
 
-install(TARGETS graphite2 EXPORT graphite2 LIBRARY DESTINATION lib${LIB_SUFFIX} ARCHIVE DESTINATION lib${LIB_SUFFIX} PUBLIC_HEADER DESTINATION include/graphite2 RUNTIME DESTINATION bin)
+install(TARGETS graphite2 EXPORT graphite2 LIBRARY DESTINATION lib${LIB_SUFFIX} ARCHIVE DESTINATION lib${LIB_SUFFIX} PUBLIC_HEADER DESTINATION include/graphite2 RUNTIME DESTINATION bin INCLUDES DESTINATION include)
 install(EXPORT graphite2 FILE graphite2Targets.cmake NAMESPACE gr2_:: DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/graphite2)
 install(FILES ${PROJECT_BINARY_DIR}/graphite2Config.cmake
               ${PROJECT_BINARY_DIR}/graphite2ConfigVersion.cmake
